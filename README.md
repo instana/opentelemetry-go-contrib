@@ -1,13 +1,13 @@
-# OpenTelemetry-Go Contrib
+# Instana OpenTelemetry Go Contrib
 
-[![build_and_test](https://github.com/open-telemetry/opentelemetry-go-contrib/workflows/build_and_test/badge.svg)](https://github.com/open-telemetry/opentelemetry-go-contrib/actions?query=workflow%3Abuild_and_test+branch%3Amain)
-[![codecov.io](https://codecov.io/gh/open-telemetry/opentelemetry-go-contrib/coverage.svg?branch=main)](https://app.codecov.io/gh/open-telemetry/opentelemetry-go-contrib?branch=main)
-[![Docs](https://godoc.org/go.opentelemetry.io/contrib?status.svg)](https://pkg.go.dev/go.opentelemetry.io/contrib)
-[![Go Report Card](https://goreportcard.com/badge/go.opentelemetry.io/contrib)](https://goreportcard.com/report/go.opentelemetry.io/contrib)
-[![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/opentelemetry-go-contrib.svg)](https://issues.oss-fuzz.com/issues?q=project:opentelemetry-go-contrib)
-[![Slack](https://img.shields.io/badge/slack-@cncf/otel--go-brightgreen.svg?logo=slack)](https://cloud-native.slack.com/archives/C01NPAXACKT)
+> [!IMPORTANT]
+> This project is currently in **beta** status and is susceptible to breaking changes. APIs, features, and functionality may change without notice. Use in production environments at your own risk.
 
-Collection of 3rd-party packages for [OpenTelemetry-Go](https://github.com/open-telemetry/opentelemetry-go).
+## Overview
+
+Instana OpenTelemetry Go Contrib is based on Open Source [OpenTelemetry Go Contrib](https://github.com/open-telemetry/opentelemetry-go-contrib). It provides a collection of 3rd-party packages for OpenTelemetry-Go which focuses on supporting Instana OpenTelemetry and IBM platforms (S390X Linux, PowerPC Linux, AIX) as well as other platforms (Linux x64/ARM64, macOS, and Windows).
+
+This repository contains instrumentation libraries, propagators, detectors, exporters, samplers, bridges, and processors that extend the core OpenTelemetry-Go functionality.
 
 ## Contents
 
@@ -22,59 +22,48 @@ Collection of 3rd-party packages for [OpenTelemetry-Go](https://github.com/open-
 
 ## Project Status
 
-This project contains both stable and unstable modules.
-Refer to the module for its version or our [versioning manifest](./versions.yaml).
+This project contains both stable and unstable modules. Refer to the module for its version or our [versioning manifest](./versions.yaml).
 
-Project versioning information and stability guarantees can be found in the [versioning documentation](https://github.com/open-telemetry/opentelemetry-go/blob/a724cf884287e04785eaa91513d26a6ef9699288/VERSIONING.md).
-
-Progress and status specific to this repository is tracked in our local [project boards](https://github.com/open-telemetry/opentelemetry-go-contrib/projects?query=is%3Aopen) and [milestones](https://github.com/open-telemetry/opentelemetry-go-contrib/milestones).
+Project versioning information and stability guarantees can be found in the [versioning documentation](VERSIONING.md).
 
 ### Compatibility
 
-OpenTelemetry-Go Contrib ensures compatibility with the current supported
-versions of
-the [Go language](https://golang.org/doc/devel/release#policy):
+OpenTelemetry-Go Contrib ensures compatibility with the current supported versions of the [Go language](https://golang.org/doc/devel/release#policy):
 
 > Each major Go release is supported until there are two newer major releases.
 > For example, Go 1.5 was supported until the Go 1.7 release, and Go 1.6 was supported until the Go 1.8 release.
 
-For versions of Go that are no longer supported upstream, opentelemetry-go-contrib will
-stop ensuring compatibility with these versions in the following manner:
+## Getting Started
 
-- A minor release of opentelemetry-go-contrib will be made to add support for the new
-  supported release of Go.
-- The following minor release of opentelemetry-go-contrib will remove compatibility
-  testing for the oldest (now archived upstream) version of Go. This, and
-  future, releases of opentelemetry-go-contrib may include features only supported by
-  the currently supported versions of Go.
+### Download and Build
 
-This project is tested on the following systems.
+The Instana OpenTelemetry Go Contrib is available in source as `tar.gz` or `zip` file which can be downloaded from releases.
 
-| OS       | Go Version | Architecture |
-| -------- | ---------- | ------------ |
-| Ubuntu   | 1.26       | amd64        |
-| Ubuntu   | 1.25       | amd64        |
-| Ubuntu   | 1.26       | 386          |
-| Ubuntu   | 1.25       | 386          |
-| macOS    | 1.26       | amd64        |
-| macOS    | 1.25       | amd64        |
-| macOS    | 1.26       | arm64        |
-| macOS    | 1.25       | arm64        |
-| Windows  | 1.26       | amd64        |
-| Windows  | 1.25       | amd64        |
-| Windows  | 1.26       | 386          |
-| Windows  | 1.25       | 386          |
+Before building from source, make sure the following tools are installed:
+- Go 1.25 or above
+- Standard build tools for your platform (gcc/g++ on Linux/AIX, Xcode Command Line Tools on macOS, Visual Studio Build Tools on Windows)
 
-While this project should work for other systems, no compatibility guarantees
-are made for those systems currently.
+To build everything, run:
+```bash
+make
+```
+
+### Using the Library
+
+To use Instana OpenTelemetry Go Contrib in your project, add a replace directive in your `go.mod` file to point to the local path or repository:
+
+```go
+replace go.opentelemetry.io/contrib => /path/to/instana-opentelemetry-go-contrib
+```
+
+Then import the packages in your Go code as usual:
+```go
+import (
+    "go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
+    "go.opentelemetry.io/contrib/propagators/b3"
+)
+```
 
 ## Contributing
 
 For information on how to contribute, consult [the contributing guidelines](./CONTRIBUTING.md)
-
-### Emeritus
-
-- [Alex Kats](https://github.com/akats7), Triager
-
-For more information about the emeritus role, see the
-[community repository](https://github.com/open-telemetry/community/blob/main/guides/contributor/membership.md#emeritus-maintainerapprovertriager).
